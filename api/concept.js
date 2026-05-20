@@ -89,6 +89,8 @@ function buildPrompt(pa, mode, anchor, ringFilter, cardName) {
 
   const anchorLine = anchor && anchor.trim() ? `\n\nANCHOR (this is the constraint to build around): "${anchor.trim()}"` : '';
 
+  const TIMING_RULE = 'TIMING: Today is May 2026. Any future-tense reference (tentpole quarter, launch window, tournament season, year-in-review, etc.) must use 2026 or 2027. Never reference 2024 or 2025 as a future date. Never use "Q3 2025" or similar — use "Q4 2026", "Q1 2027", "Spring 2027", etc.';
+
   if (mode === 'riff') {
     const ringName = RING_LABEL[ringFilter] || 'Clips + Reactions';
     return `You are pitching a fresh "${ringName}" activation concept for ${ctx.name} to Google's marketing leadership.
@@ -96,6 +98,8 @@ function buildPrompt(pa, mode, anchor, ringFilter, cardName) {
 ${ctx.name} positioning: ${ctx.positioning}
 Audience: ${ctx.audience} (${ctx.index} index)
 Brand context: ${ctx.brand}
+
+${TIMING_RULE}
 
 Existing concepts on the deck (for voice + structural reference — do NOT duplicate):
 ${examplesBlock}${anchorLine}
@@ -106,6 +110,7 @@ The existing concept being riffed is "${cardName || 'one of the above'}". Genera
 - State ${ctx.name}'s specific product role
 - Be one ring only: ${ringName}
 - Match the punchy, no-fluff, media-strategist voice
+- Use 2026/2027 framing only
 
 Return ONE card in the cards array.`;
   }
@@ -116,6 +121,8 @@ Return ONE card in the cards array.`;
 ${ctx.name} positioning: ${ctx.positioning}
 Audience: ${ctx.audience} (${ctx.index} index)
 Brand context: ${ctx.brand}
+
+${TIMING_RULE}
 
 Existing concepts on the deck (for voice + structural reference — do NOT duplicate):
 ${examplesBlock}${anchorLine}
@@ -131,6 +138,7 @@ Each concept must:
 - State ${ctx.name}'s specific product role
 - Match the punchy, no-fluff, media-strategist voice
 - Be net-new — different angles than the existing six
+- Use 2026/2027 framing only
 
 Return three cards in the cards array, one per ring, in order: clips, streaming, live.`;
 }
