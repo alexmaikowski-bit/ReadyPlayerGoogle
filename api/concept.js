@@ -187,9 +187,10 @@ export default async function handler(req, res) {
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
         generationConfig: {
           temperature: 1.0,
-          maxOutputTokens: 2048,
+          maxOutputTokens: 4096,
           responseMimeType: 'application/json',
-          responseSchema
+          responseSchema,
+          thinkingConfig: { thinkingBudget: 0 }
         }
       })
     });
